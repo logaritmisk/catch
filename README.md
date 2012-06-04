@@ -10,6 +10,7 @@ Catch solves this!
 **Tested on:**
 
 - Mac OS X 10.7.4 (Lion)
+- Ubuntu 8.04 (Hardy)
 
 
 ## Usage
@@ -26,6 +27,5 @@ Will highlight all lines that contains 'foobar'
 
 ## Todo
 
-* Test on Ubuntu
 * Better README
-* Change color
+* Ability to change color
