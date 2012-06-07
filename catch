@@ -1,9 +1,26 @@
 #!/bin/bash
 
+
+COLOR='red'
+SED='sed -r'
+
+
+while getopts 'c:' OPTION; do
+  case $OPTION in
+    c) COLOR=$OPTARG ;;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+case $COLOR in
+  red)   COLOR='\033[0;31m' ;;
+  green) COLOR='\033[0;32m' ;;
+esac
+
 if [[ $OSTYPE = darwin* ]]; then
-  sed="sed -E"
-else
-  sed="sed -r"
+  SED='sed -E'
 fi
 
-$sed "/$1/ s/${2:-($1)}/$(echo @${2:-($1)}@ | sed 's/(.*)/'$(echo -e '\033[0;32m')'\\1'$(echo -e '\033[0m')'/' | $sed 's/(^@|@$)//g')/g"
+
+$SED "/$1/ s/${2:-($1)}/$(echo @${2:-($1)}@ | sed 's/(.*)/'$(echo -e $COLOR)'\\1'$(echo -e '\033[0m')'/' | $SED 's/(^@|@$)//g')/g"
